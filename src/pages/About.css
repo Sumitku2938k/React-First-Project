@@ -1,0 +1,27 @@
+.section-hero {
+  & .grid {
+    align-items: center;
+  }
+
+  .hero-content {
+    & p {
+      margin: 2.4rem 0 2.6rem 0;
+      &:first-child {
+        margin: 0 0 1.2rem 0;
+      }
+    }
+    & h1{
+      text-decoration: #646CFF underline;
+      
+    }
+  }
+
+  .hero-image {
+    display: flex;
+    justify-content: center;
+    & img {
+      width: 80%;
+      height: 100%;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+    padding: 3.2rem;
+    text-align: center;
+    background-color: var(--btn-color);
+    margin-top: auto;
+}
