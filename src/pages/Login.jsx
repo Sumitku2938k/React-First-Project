@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import { useAuth } from '../store/auth';
 
 export default function Login() {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+  const [success, setSuccess] = useState("");
 
-  const navigate = useNavigate();
+  const Navigate = useNavigate();
+  const {storeTokenInLS} = useAuth();
 
   const handleInput = (e) => {
     let name = e.target.name;
@@ -20,9 +23,33 @@ export default function Login() {
     });
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log('Login submit', user);
+    //Handling the form submission
+        try {
+            const response = await fetch('http://localhost:3000/api/auth/login', {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(user),
+            });    
+            console.log("response data : ", response);
+
+            if(response.ok){
+              const res_data = await response.json();
+              console.log("Response from Server : ", res_data);
+              storeTokenInLS(res_data.token); //store the token in localhost 
+              setSuccess('Login successful!');
+              setUser({ email: "", password: "" });
+              setTimeout(() => setSuccess(''), 3000);
+              setTimeout(() => Navigate("/"), 4000);
+            }
+            console.log(response);
+        } catch (error) {
+            console.log("Login Error: ",error)
+        }
   };
 
   return (
@@ -51,6 +78,7 @@ export default function Login() {
               <h1>Welcome Back!</h1>
               <p>Login to continue to your account</p>
             </div>
+            {success && <div className="success">{success}</div>}
 
             <form onSubmit={handleSubmit} className="login-form">
               <div className="input-group">

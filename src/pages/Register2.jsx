@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './Register.css'
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../store/auth';
 
 export default function Register() {
     const [user, setUser] = useState({
@@ -11,21 +13,48 @@ export default function Register() {
     const [success, setSuccess] = useState("");
     const [showPassword, setShowPassword] = useState(false);
 
+    const Navigate = useNavigate();
+    const {storeTokenInLS} = useAuth();
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setUser({ ...user, [name]: value });
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         if (!/\S+@\S+\.\S+/.test(user.email)) {
             alert('Please enter a valid email address');
             return;
         }
         console.log("User registered:", user);
-        setSuccess('Registration successful!');
-        setUser({ username: "", email: "", phone: "", password: "" });
-        setTimeout(() => setSuccess(''), 3000);
+
+        //Handling the form submission
+        try {
+            const response = await fetch('http://localhost:3000/api/auth/register', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(user),
+            });    
+            console.log("response data : ", response);
+
+            if(response.ok){
+                const res_data = await response.json();
+                console.log("Response from Server : ", res_data);
+                storeTokenInLS(res_data.token); //store the token in localhost 
+                setSuccess('Registration successful!');
+                setUser({ username: "", email: "", phone: "", password: "" });
+                setTimeout(() => setSuccess(''), 3000);
+                setTimeout(() => Navigate("/login"), 5000);
+            } else {
+                console.log("error inside response ", "error");
+            }
+        } catch (error) {
+            console.log("Registration Error: ",error)
+        }
+        
     }
 
     return (
