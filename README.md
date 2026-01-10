@@ -1,16 +1,43 @@
-# React + Vite
+# Client - Web Development Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **Frontend (Client-side)** code for the project. It is built using React.js and Vite. It provides the user interface where users can register, login, and fill out the contact form.
 
-Currently, two official plugins are available:
+## 🛠️ Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The following technologies are used in this project:
 
-## React Compiler
+- **React.js**: UI library for building components.
+- **Vite**: Fast build tool and development server.
+- **React Router DOM**: For navigation between pages.
+- **CSS / Tailwind**: For styling.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- **Home Page**: Landing page of the project.
+- **Authentication UI**: Login and Registration forms that connect to the backend API.
+- **Contact Form**: Interface for submitting user queries.
+- **Responsive Design**: Mobile and desktop friendly layout.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ⚙️ Installation & Setup
+
+Follow the steps below to run the frontend:
+
+### 1. Navigate to the folder
+Open the terminal and navigate to the client directory:
+```bash
+cd client
+```
+
+### 2. Dependencies Install karein
+```bash
+npm install
+```
+
+### 3. Development Server Start karein
+```bash
+npm run dev
+```
+Isse project local URL (usually `http://localhost:5173`) par open ho jayega.
+
+---
+Created with ❤️ by Sumit
