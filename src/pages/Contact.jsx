@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Contact.css";
+import { useAuth } from "../store/auth";
 
 export default function Contact() {
   const [contact, setContact] = useState({
@@ -7,6 +8,19 @@ export default function Contact() {
     email: "",
     message: "",
   });
+
+  const [userData, setUserData] = useState(true);
+  const {user} = useAuth();
+
+  if(userData && user){
+    setContact({
+      username: user.username,
+      email: user.email,
+      message: "",
+    })
+
+    setUserData(false);
+  }
 
   const handleInput = (e) => {
     const name = e.target.name;
