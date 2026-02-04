@@ -58,9 +58,8 @@ export default function Contact() {
               setTimeout(() => setSuccess(''), 2000);
               setTimeout(() => Navigate("/"), 3000);
             }
-            console.log(response);
         } catch (error) {
-            console.log("Login Error: ",error)
+            console.log("Contact Form Error: ",error)
         }
   };
 
