@@ -46,8 +46,8 @@ export default function Register() {
                 storeTokenInLS(res_data.token); //store the token in localhost 
                 setSuccess('Registration successful!');
                 setUser({ username: "", email: "", phone: "", password: "" });
-                setTimeout(() => setSuccess(''), 3000);
-                setTimeout(() => Navigate("/login"), 5000);
+                setTimeout(() => setSuccess(''), 2000);
+                setTimeout(() => Navigate("/login"), 3000);
             } else {
                 console.log("error inside response ", "error");
             }

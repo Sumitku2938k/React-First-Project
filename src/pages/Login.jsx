@@ -43,8 +43,8 @@ export default function Login() {
               storeTokenInLS(res_data.token); //store the token in localhost 
               setSuccess('Login successful!');
               setUser({ email: "", password: "" });
-              setTimeout(() => setSuccess(''), 3000);
-              setTimeout(() => Navigate("/"), 4000);
+              setTimeout(() => setSuccess(''), 2000);
+              setTimeout(() => Navigate("/"), 3000);
             }
             console.log(response);
         } catch (error) {

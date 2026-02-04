@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Contact.css";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../store/auth";
 
 export default function Contact() {
@@ -8,6 +9,9 @@ export default function Contact() {
     email: "",
     message: "",
   });
+
+  const [success, setSuccess] = useState("");
+  const Navigate = useNavigate();
 
   const [userData, setUserData] = useState(true);
   const {user} = useAuth();
@@ -32,9 +36,32 @@ export default function Contact() {
     });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(contact);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log('contact form submitted', contact);
+    //Handling the form submission
+        try {
+            const response = await fetch('http://localhost:3000/api/form/contact', {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(contact), //object into json conversion 
+            });    
+            console.log("response data : ", response);
+
+            if(response.ok){
+              const res_data = await response.json();
+              console.log("Response from Server : ", res_data);
+              setSuccess('Contact form submitted successfully!');
+              setContact({ message: "" });
+              setTimeout(() => setSuccess(''), 2000);
+              setTimeout(() => Navigate("/"), 3000);
+            }
+            console.log(response);
+        } catch (error) {
+            console.log("Login Error: ",error)
+        }
   };
 
   return (
