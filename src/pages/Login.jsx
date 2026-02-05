@@ -35,18 +35,23 @@ export default function Login() {
               },
               body: JSON.stringify(user),
             });    
-            console.log("response data : ", response);
-
+            console.log("login form data : ", response);
+          
+            const res_data = await response.json();
+            console.log("Response from Server : ", res_data);
+          
             if(response.ok){
-              const res_data = await response.json();
-              console.log("Response from Server : ", res_data);
               storeTokenInLS(res_data.token); //store the token in localhost 
               setSuccess('Login successful!');
               setUser({ email: "", password: "" });
               setTimeout(() => setSuccess(''), 2000);
               setTimeout(() => Navigate("/"), 3000);
             }
-            console.log(response);
+            else{
+              setSuccess('Login failed!');
+              setTimeout(() => setSuccess(''), 2000);
+              alert(res_data.extraDetails ? res_data.extraDetails : res_data.message);
+            }
         } catch (error) {
             console.log("Login Error: ",error)
         }

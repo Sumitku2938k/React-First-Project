@@ -40,16 +40,17 @@ export default function Register() {
             });    
             console.log("response data : ", response);
 
+            const res_data = await response.json();
+            console.log("Response from Server : ", res_data.extraDetails);
+
             if(response.ok){
-                const res_data = await response.json();
-                console.log("Response from Server : ", res_data);
                 storeTokenInLS(res_data.token); //store the token in localhost 
                 setSuccess('Registration successful!');
                 setUser({ username: "", email: "", phone: "", password: "" });
                 setTimeout(() => setSuccess(''), 2000);
                 setTimeout(() => Navigate("/login"), 3000);
             } else {
-                console.log("error inside response ", "error");
+                alert(res_data.extraDetails ? res_data.extraDetails : res_data.message);
             }
         } catch (error) {
             console.log("Registration Error: ",error)
