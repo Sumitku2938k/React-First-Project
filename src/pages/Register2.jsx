@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './Register.css'
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../store/auth';
+import { toast } from 'react-toastify';
 
 export default function Register() {
     const [user, setUser] = useState({
@@ -50,7 +51,7 @@ export default function Register() {
                 setTimeout(() => setSuccess(''), 2000);
                 setTimeout(() => Navigate("/login"), 3000);
             } else {
-                alert(res_data.extraDetails ? res_data.extraDetails : res_data.message);
+                toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message);
             }
         } catch (error) {
             console.log("Registration Error: ",error)

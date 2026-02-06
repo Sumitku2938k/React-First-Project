@@ -58,6 +58,11 @@ li {
   list-style: none;
 }
 
+.toastBody {
+  font-family: 'Atlas Grotesk', Arial, Helvetica, sans-serif;
+  font-size: 1.7rem;
+}
+
 /*? layout Rule  */
 
 .container {

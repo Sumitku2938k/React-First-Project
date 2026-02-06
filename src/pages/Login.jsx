@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useAuth } from '../store/auth';
+import { toast } from 'react-toastify';
 
 export default function Login() {
   const [user, setUser] = useState({
@@ -50,7 +51,7 @@ export default function Login() {
             else{
               setSuccess('Login failed!');
               setTimeout(() => setSuccess(''), 2000);
-              alert(res_data.extraDetails ? res_data.extraDetails : res_data.message);
+              toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message);
             }
         } catch (error) {
             console.log("Login Error: ",error)
