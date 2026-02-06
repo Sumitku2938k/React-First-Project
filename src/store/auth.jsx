@@ -24,6 +24,8 @@ export const AuthProvider = ({children}) => {
     //JWT Authentication - to get the currently loggedIn user data
     const userAuthentication = async () => {
         try {
+            if (!token) return;
+
             const response = await fetch("http://localhost:3000/api/auth/user", {
                 method: "GET",
                 headers: {
@@ -55,7 +57,6 @@ export const AuthProvider = ({children}) => {
             if (response.ok) {
                 const res_data = await response.json();
                 setServices(res_data.msg);
-                console.log("Services data : ", res_data.msg);
             } else {
                 console.error("Failed to fetch services data");
             }
@@ -67,7 +68,7 @@ export const AuthProvider = ({children}) => {
     useEffect(() => {
         userAuthentication();
         getAllService();
-    }, [])
+    }, [token])
 
 
     return <AuthContext.Provider value={{isLoggedIn, storeTokenInLS, LogoutUser, user, services}}>
