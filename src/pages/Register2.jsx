@@ -49,7 +49,7 @@ export default function Register() {
                 setSuccess('Registration successful!');
                 setUser({ username: "", email: "", phone: "", password: "" });
                 setTimeout(() => setSuccess(''), 2000);
-                setTimeout(() => Navigate("/login"), 3000);
+                setTimeout(() => Navigate("/"), 3000); //Navigate to home page after 3 seconds
             } else {
                 toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message);
             }
