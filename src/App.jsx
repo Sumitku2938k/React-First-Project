@@ -10,6 +10,9 @@ import Navbar from './components/Navbar.jsx'
 import Error from './pages/Error.jsx'
 import Footer from './components/Footer/Footer.jsx'
 import Logout from './pages/Logout.jsx'
+import AdminLayout from './components/layouts/Admin-Layout.jsx'
+import AdminUsers from './pages/Admin-Users.jsx'
+import AdminContacts from './pages/Admin-Contacts.jsx'
 
 function App() {
   return (
@@ -25,6 +28,10 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/logout" element={<Logout />} />
         <Route path="*" element={<Error />} />
+        <Route path="/admin" element={<AdminLayout />} >
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="contacts" element={<AdminContacts />} />
+        </Route>
       </Routes>
       <Footer />
     </Router>
