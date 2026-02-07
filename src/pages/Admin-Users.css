@@ -1,0 +1,69 @@
+.admin-users-section {
+  padding: 3.2rem 2.4rem;
+}
+
+.admin-users-section h1 {
+  font-size: 3.2rem;
+  margin-bottom: 3.2rem;
+  color: #333;
+  font-weight: 600;
+}
+
+.admin-users {
+  overflow-x: auto;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.4rem 1.2rem rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.admin-users table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 80rem; /* Prevents squishing on small screens */
+}
+
+.admin-users th,
+.admin-users td {
+  padding: 1.6rem 2.4rem;
+  text-align: left;
+}
+
+.admin-users th {
+  background-color: #1f2937; /* Dark gray header */
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-users td {
+  font-size: 1.5rem;
+  color: #4b5563;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.admin-users tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.admin-users tbody tr:hover {
+  background-color: #f3f4f6;
+}
+
+.admin-users tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Target the Edit and Delete columns to make them look actionable */
+.admin-users td:nth-child(4) {
+  color: #2563eb;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.admin-users td:nth-child(5) {
+  color: #dc2626;
+  cursor: pointer;
+  font-weight: 500;
+}
