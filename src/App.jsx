@@ -13,6 +13,7 @@ import Logout from './pages/Logout.jsx'
 import AdminLayout from './components/layouts/Admin-Layout.jsx'
 import AdminUsers from './pages/Admin-Users.jsx'
 import AdminContacts from './pages/Admin-Contacts.jsx'
+import AdminUpdate from './pages/Admin-Update.jsx'
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route path="*" element={<Error />} />
         <Route path="/admin" element={<AdminLayout />} >
           <Route path="users" element={<AdminUsers />} />
+          <Route path="users/:id/edit" element={<AdminUpdate />} />
           <Route path="contacts" element={<AdminContacts />} />
         </Route>
       </Routes>
