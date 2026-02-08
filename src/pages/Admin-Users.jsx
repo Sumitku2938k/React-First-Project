@@ -12,7 +12,7 @@ const AdminUsers = () => {
             const response = await fetch("http://localhost:3000/api/admin/users", {
                 method: "GET",
                 headers: {
-                    Authorization: authorizationToken,
+                    Authorization: authorizationToken, 
                 },
             });
             const data = await response.json(); //json to object
@@ -20,6 +20,21 @@ const AdminUsers = () => {
             setUsers(data);
         } catch (error) {
             console.log(error);
+        }
+    }
+
+    //Delete the user on clicking delete btn
+    let deleteUser = async (id) => {
+        const response = await fetch(`http://localhost:3000/api/admin/users/delete/${id}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: authorizationToken, 
+                },
+        });
+        if(response.ok){
+            getAllUsersData(); //Refresh the user list after deletion
+        } else {
+            console.error("Failed to delete user");
         }
     }
 
@@ -53,7 +68,7 @@ const AdminUsers = () => {
                                     <td>{user.email}</td>
                                     <td>{user.phone}</td>
                                     <td>Edit</td>
-                                    <td>Delete</td>
+                                    <td><button onClick={() => {deleteUser(user._id)}}> Delete </button></td>
                                 </tr>
                             })}
                         </tbody>
