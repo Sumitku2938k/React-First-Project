@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../store/auth';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const AdminUpdate = () => {
     const [user, setUser] = useState({
@@ -8,8 +8,10 @@ const AdminUpdate = () => {
         email: "",
         phone: "",
     })
+    const [success, setSuccess] = useState("");
 
     const params = useParams();
+    const navigate = useNavigate();
     const {authorizationToken} = useAuth();
 
     const handleInput = (e) => {
@@ -32,6 +34,33 @@ const AdminUpdate = () => {
             const data = await response.json(); //json to object
             console.log(`single user data: ${data}`);
             setUser(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //To update the user data on form submit dynamically using the id from params and user data from state
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await fetch(`http://localhost:3000/api/admin/users/update/${params.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: authorizationToken, 
+                },
+                body: JSON.stringify(user),
+            });
+            if(response.ok){
+                console.log("User updated successfully");
+                setSuccess('Updated successfully!');
+                setTimeout(() => {
+                    setSuccess('');
+                    navigate("/admin/users");
+                }, 2000);
+            } else {
+                console.error("Failed to update user");
+            }
         } catch (error) {
             console.log(error);
         }
@@ -61,8 +90,9 @@ const AdminUpdate = () => {
                                 <p>Fill out the form below and we'll get back to you shortly</p> */}
                                 <h2 style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Update User Data</h2>
                             </div>
+                            {success && <div className="success">{success}</div>}
 
-                            <form className="contact-form">
+                            <form className="contact-form" onSubmit={handleSubmit}>
                                 <div className="form-group">
                                     <label htmlFor="username">Full Name</label>
                                     <div className="input-wrapper">
@@ -104,7 +134,6 @@ const AdminUpdate = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 }
