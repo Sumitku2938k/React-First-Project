@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import { useAuth } from '../store/auth';
 import './Admin-Users.css';
+import { Link } from 'react-router-dom';
 
 const AdminUsers = () => {
     const [users, setUsers] = useState([]);
@@ -67,7 +68,7 @@ const AdminUsers = () => {
                                     <td>{user.username}</td>
                                     <td>{user.email}</td>
                                     <td>{user.phone}</td>
-                                    <td>Edit</td>
+                                    <td><Link to={`/admin/users/${user._id}/edit`}>Edit</Link></td>
                                     <td><button onClick={() => {deleteUser(user._id)}}> Delete </button></td>
                                 </tr>
                             })}
