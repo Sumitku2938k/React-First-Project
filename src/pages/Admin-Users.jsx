@@ -26,10 +26,10 @@ const AdminUsers = () => {
     //Delete the user on clicking delete btn
     let deleteUser = async (id) => {
         const response = await fetch(`http://localhost:3000/api/admin/users/delete/${id}`, {
-                method: "DELETE",
-                headers: {
-                    Authorization: authorizationToken, 
-                },
+            method: "DELETE",
+            headers: {
+                Authorization: authorizationToken, 
+            },
         });
         if(response.ok){
             getAllUsersData(); //Refresh the user list after deletion
