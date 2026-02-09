@@ -1,9 +1,81 @@
-import React from 'react';
+import {useEffect, useState} from 'react';
+import { useAuth } from '../store/auth';
+import { Link } from 'react-router-dom';
+import './Admin-Contacts.css';
+
 
 const AdminContacts = () => {
+    const [contacts, setContacts] = useState([]);
+
+    const {authorizationToken} = useAuth();
+
+    const getAllContactsData = async () => {
+        try {
+            const response = await fetch("http://localhost:3000/api/admin/contacts", {
+                method: "GET",
+                headers: {
+                    Authorization: authorizationToken, 
+                },
+            });
+            const data = await response.json(); //json to object
+            console.log(` contacts: ${data}`);
+            setContacts(data);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //Delete the user on clicking delete btn
+    // let deleteContact = async (id) => {
+    //     const response = await fetch(`http://localhost:3000/api/admin/users/delete/${id}`, {
+    //         method: "DELETE",
+    //         headers: {
+    //             Authorization: authorizationToken, 
+    //         },
+    //     });
+    //     if(response.ok){
+    //         getAllUsersData(); //Refresh the user list after deletion
+    //     } else {
+    //         console.error("Failed to delete user");
+    //     }
+    // }
+
+
+    useEffect(() => {
+        getAllContactsData();
+    }, []);
+
+
     return (
         <div>
-            <h1>Admin Contacts Page</h1>
+            <section className='admin-contacts-section'>
+                <div className="container">
+                    <h1>Admin Contacts Data</h1>
+                </div>
+                <div className='container admin-contacts'>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Message</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {contacts.map((contact, idx) => {
+                                return <tr key={idx}>
+                                    <td>{contact.username}</td>
+                                    <td>{contact.email}</td>
+                                    <td>{contact.message}</td>
+                                    <td><button className="delete-btn">Delete</button></td>
+                                </tr>
+                            })}
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            
         </div>
     );
 }

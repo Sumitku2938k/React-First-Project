@@ -1,0 +1,71 @@
+/* c:\Users\Sumit\Desktop\Web Development By Thapa\client\src\pages\Admin-Contacts.css */
+
+.admin-contacts-section {
+  padding: 3rem 0;
+}
+
+.admin-contacts-section h1 {
+  font-size: 2.8rem;
+  margin-bottom: 2rem;
+  color: #fff; /* Moved from inline style to here */
+  text-transform: capitalize;
+}
+
+.admin-contacts {
+  background-color: #18181b; /* Dark card background */
+  padding: 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow-x: auto; /* Handles overflow on smaller screens */
+}
+
+.admin-contacts table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 60rem; /* Ensures table keeps shape */
+}
+
+.admin-contacts th {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #e4e4e7;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid #3f3f46;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.admin-contacts td {
+  font-size: 1.5rem;
+  color: #a1a1aa;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid #27272a;
+}
+
+.admin-contacts tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.admin-contacts tbody tr:hover {
+  background-color: #27272a; /* Subtle hover effect */
+}
+
+/* Delete Button Styling */
+.delete-btn {
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.6rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.delete-btn:hover {
+  background-color: #dc2626;
+  box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+  transform: translateY(-2px);
+}
