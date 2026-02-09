@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react';
 import { useAuth } from '../store/auth';
 import './Admin-Users.css';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const AdminUsers = () => {
     const [users, setUsers] = useState([]);
@@ -34,8 +35,9 @@ const AdminUsers = () => {
         });
         if(response.ok){
             getAllUsersData(); //Refresh the user list after deletion
+            toast.success("user deleted successfully");
         } else {
-            console.error("Failed to delete user");
+            toast.error("Failed to delete user");
         }
     }
 
