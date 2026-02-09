@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({children}) => {
     const [token, setToken] = useState(localStorage.getItem("token"));
     const [user, setUser] = useState("");
+    const [isLoading, setIsLoading] = useState(true); //To track the loading state of user authentication
     const authorizationToken = `Bearer ${token}`;
 
     //Store token in local storage
@@ -39,8 +40,10 @@ export const AuthProvider = ({children}) => {
                 const data = await response.json();
                 setUser(data.userData);
                 console.log("Authenticated user data : ", data.userData);
+                setIsLoading(false); //Set loading to false after we have the user data, whether it's successful or not, to avoid infinite loading state
             } else {
                 console.error("Failed to fetch user data");
+                setIsLoading(false); //Even if the fetch fails, we should set isLoading to false to avoid infinite loading state
             }
         } catch (error) {
             console.error("Error in fetching user data : ", error);
@@ -73,7 +76,7 @@ export const AuthProvider = ({children}) => {
     }, [token])
 
 
-    return <AuthContext.Provider value={{isLoggedIn, storeTokenInLS, LogoutUser, user, services, authorizationToken}}>
+    return <AuthContext.Provider value={{isLoggedIn, storeTokenInLS, LogoutUser, user, services, authorizationToken, isLoading}}>
         {children}
     </AuthContext.Provider>
 }
