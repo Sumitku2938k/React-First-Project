@@ -9,6 +9,8 @@ export const AuthProvider = ({children}) => {
     const [isLoading, setIsLoading] = useState(true); //To track the loading state of user authentication
     const authorizationToken = `Bearer ${token}`;
 
+    const API = import.meta.env.VITE_BACKEND_URL; //Accessing the backend URL from environment variable
+
     //Store token in local storage
     const storeTokenInLS = (serverToken) => {   
         setToken(serverToken);
@@ -29,7 +31,7 @@ export const AuthProvider = ({children}) => {
         try {
             if (!token) return;
 
-            const response = await fetch("http://localhost:3000/api/auth/user", {
+            const response = await fetch(`${API}/api/auth/user`, {
                 method: "GET",
                 headers: {
                     Authorization: authorizationToken,
@@ -55,7 +57,7 @@ export const AuthProvider = ({children}) => {
 
     const getAllService = async () => {
         try {
-            const response = await fetch("http://localhost:3000/api/data/services", {
+            const response = await fetch(`${API}/api/data/services`, {
                 method: "GET",
             });
 
@@ -76,7 +78,7 @@ export const AuthProvider = ({children}) => {
     }, [token])
 
 
-    return <AuthContext.Provider value={{isLoggedIn, storeTokenInLS, LogoutUser, user, services, authorizationToken, isLoading}}>
+    return <AuthContext.Provider value={{isLoggedIn, storeTokenInLS, LogoutUser, user, services, authorizationToken, isLoading, API}}>
         {children}
     </AuthContext.Provider>
 }

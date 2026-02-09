@@ -14,7 +14,7 @@ export default function Contact() {
   const Navigate = useNavigate();
 
   const [userData, setUserData] = useState(true);
-  const {user} = useAuth();
+  const {user, API} = useAuth();
 
   if(userData && user){
     setContact({
@@ -41,7 +41,7 @@ export default function Contact() {
     console.log('contact form submitted', contact);
     //Handling the form submission
         try {
-            const response = await fetch('http://localhost:3000/api/form/contact', {
+            const response = await fetch(`${API}/api/form/contact`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

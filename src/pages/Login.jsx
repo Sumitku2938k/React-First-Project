@@ -13,7 +13,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const Navigate = useNavigate();
-  const {storeTokenInLS} = useAuth();
+  const {storeTokenInLS, API} = useAuth();
 
   const handleInput = (e) => {
     let name = e.target.name;
@@ -30,7 +30,7 @@ export default function Login() {
     console.log('Login submit', user);
     //Handling the form submission
         try {
-            const response = await fetch('http://localhost:3000/api/auth/login', {
+            const response = await fetch(`${API}/api/auth/login`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",

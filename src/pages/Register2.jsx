@@ -15,7 +15,7 @@ export default function Register() {
     const [showPassword, setShowPassword] = useState(false);
 
     const Navigate = useNavigate();
-    const {storeTokenInLS} = useAuth();
+    const {storeTokenInLS, API} = useAuth();
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
@@ -32,7 +32,7 @@ export default function Register() {
 
         //Handling the form submission
         try {
-            const response = await fetch('http://localhost:3000/api/auth/register', {
+            const response = await fetch(`${API}/api/auth/register`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

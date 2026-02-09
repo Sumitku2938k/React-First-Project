@@ -12,7 +12,7 @@ const AdminUpdate = () => {
 
     const params = useParams();
     const navigate = useNavigate();
-    const {authorizationToken} = useAuth();
+    const {authorizationToken, API} = useAuth();
 
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -25,7 +25,7 @@ const AdminUpdate = () => {
     //Get single user data by id to prefill the form for update
     const singleUserData = async () => {
         try {
-            const response = await fetch(`http://localhost:3000/api/admin/users/${params.id}`, {
+            const response = await fetch(`${API}/api/admin/users/${params.id}`, {
                 method: "GET",
                 headers: {
                     Authorization: authorizationToken, 
@@ -44,7 +44,7 @@ const AdminUpdate = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch(`http://localhost:3000/api/admin/users/update/${params.id}`, {
+            const response = await fetch(`${API}/api/admin/users/update/${params.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -68,18 +68,12 @@ const AdminUpdate = () => {
     }
 
     useEffect(() => {
-        console.log()
+        console.log("params.id:", params.id);
         singleUserData();
     }, []);
 
     return (
         <div className="contact-page">
-            {/* Header Section */}
-            {/* <div className="contact-header">
-                <div className="contact-header-content">
-                    <h1>Update User Data</h1>
-                </div>
-            </div> */}
 
             {/* Main Contact Section */}
             <div className="contact-container">
@@ -88,8 +82,6 @@ const AdminUpdate = () => {
                     <div className="contact-form-section">
                         <div className="form-card">
                             <div className="form-header">
-                                {/* <h2>Send us a Message</h2>
-                                <p>Fill out the form below and we'll get back to you shortly</p> */}
                                 <h2 style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>Update User Data</h2>
                             </div>
                             {success && <div className="success">{success}</div>}
