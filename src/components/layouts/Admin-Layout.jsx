@@ -5,7 +5,7 @@ import { FaMessage } from 'react-icons/fa6';
 import { useAuth } from '../../store/auth';
 
 const AdminLayout = () => {
-    const {user} = useAuth();
+    const {user, isLoading} = useAuth();
     console.log("AdminLayout user : ", user);
 
     if(isLoading){
