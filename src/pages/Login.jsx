@@ -30,32 +30,33 @@ export default function Login() {
     console.log('Login submit', user);
     //Handling the form submission
         try {
-            const response = await fetch(`${API}/api/auth/login`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(user),
-            });    
-            console.log("login form data : ", response);
-          
-            const res_data = await response.json();
-            console.log("Response from Server : ", res_data);
-          
-            if(response.ok){
-              storeTokenInLS(res_data.token); //store the token in localhost 
-              setSuccess('Login successful!');
-              setUser({ email: "", password: "" });
-              setTimeout(() => setSuccess(''), 2000);
-              setTimeout(() => Navigate("/"), 3000);
-            }
-            else{
-              setSuccess('Login failed!');
-              setTimeout(() => setSuccess(''), 2000);
-              toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message);
-            }
+          const response = await fetch(`${API}/api/auth/login`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(user),
+          });
+          console.log("login form data : ", response);
+
+          const res_data = await response.json();
+          console.log("Response from Server : ", res_data);
+
+          if (response.ok) {
+            storeTokenInLS(res_data.token); //store the token in localhost
+            setSuccess("Login successful!");
+            setUser({ email: "", password: "" });
+            setTimeout(() => setSuccess(""), 2000);
+            setTimeout(() => Navigate("/"), 3000);
+          } else {
+            setSuccess("Login failed!");
+            setTimeout(() => setSuccess(""), 2000);
+            toast.error(
+              res_data.extraDetails ? res_data.extraDetails : res_data.message,
+            );
+          }
         } catch (error) {
-            console.log("Login Error: ",error)
+          console.log("Login Error: ", error);
         }
   };
 
